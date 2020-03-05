@@ -18,6 +18,18 @@ class TransferBase < Base
         end
     end
 
+    def handle_recipient_response(response)
+        recipient = response
+
+        if recipient.code == 200
+            response = {"error" => false, "data" => JSON.parse(recipient.body)}
+            return response
+        else
+            response = {"error" => true, "data" => JSON.parse(recipient.body)}
+            raise InitiateTransferError, response
+        end
+    end
+
     # method to handle bulk transfer response
     def handle_bulk_response(response)
 

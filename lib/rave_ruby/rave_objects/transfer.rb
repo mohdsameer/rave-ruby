@@ -24,6 +24,16 @@ class Transfer < TransferBase
         return handle_initiate_response(response)
     end
 
+    def create_transfer_recipient(data)
+        base_url = rave_object.base_url
+        data.merge!({"seckey" => rave_object.secret_key.dup})
+
+        payload = data.to_json
+
+        response = post_request("#{base_url}#{BASE_ENDPOINTS::TRANSFER_RECIPIENT}/create", payload) 
+        return handle_recipient_response(response)
+    end
+
     # method to perform bulk transfer request
     def bulk_transfer(data)
         base_url = rave_object.base_url
