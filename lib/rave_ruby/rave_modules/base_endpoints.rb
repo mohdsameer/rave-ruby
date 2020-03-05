@@ -18,4 +18,6 @@ module BASE_ENDPOINTS
     FETCH_ENDPOINT = "v2/gpx/transfers"
     REFUND_ENDPOINT = "gpx/merchant/transactions"
     BANKS_ENDPOINT = "flwv3-pug/getpaidx/api/flwpbf-banks.js"
+    COUNTRY_BANKS_ENDPOINT = "v2/banks"
+    TRANSFER_RECIPIENT= "v2/gpx/transfers/beneficiaries"
 end
