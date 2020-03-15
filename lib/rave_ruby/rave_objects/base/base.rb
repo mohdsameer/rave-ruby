@@ -80,10 +80,9 @@ class Base
 
   # method to check if the passed parameters is equal to the expected parameters
   def check_passed_parameters(required_params, passed_params)
-
     # This is used to check if the passed authorization parameters matches the required parameters
-    required_params.with_indifferent_access.each do |k, v|
-      if !passed_params.key?(k)
+    required_params.each do |k, v|
+      if !passed_params.with_indifferent_access.key?(k)
         raise IncompleteParameterError, "Parameters Incomplete, Missing Parameter: #{k}, Please pass in the complete parameter."
       end
       # return true
