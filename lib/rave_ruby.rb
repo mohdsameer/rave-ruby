@@ -54,8 +54,14 @@ require_relative 'rave_ruby/error'
           raise RaveBadKeyError, "No public key supplied and couldn't find any in environment variables. Make sure to set public key as an environment variable RAVE_PUBLIC_KEY"
         end
         # raise this error if invalid public key is passed
-        unless @public_key[0..7] == 'FLWPUBK-'
-          raise RaveBadKeyError, "Invalid public key #{@public_key}"
+        if @production
+          unless @public_key[0..7] == 'FLWPUBK-'
+            raise RaveBadKeyError, "Invalid public key #{@public_key}"
+          end
+        else
+          unless @public_key[0..7] == 'FLWPUBK-' || @public_key[0..12] == 'FLWPUBK_TEST-'
+            raise RaveBadKeyError, "Invalid public key #{@public_key}"
+          end
         end
         
         # raise this error if no secret key is passed
