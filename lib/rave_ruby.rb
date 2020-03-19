@@ -69,8 +69,14 @@ require_relative 'rave_ruby/error'
           raise RaveBadKeyError, "No secret key supplied and couldn't find any in environment variables. Make sure to set secret key as an environment variable RAVE_SECRET_KEY"
         end
         # raise this error if invalid secret key is passed
-        unless @secret_key[0..7] == 'FLWSECK-'
-          raise RaveBadKeyError, "Invalid secret key #{@secret_key}"
+        if @production
+          unless @secret_key[0..7] == 'FLWSECK-'
+            raise RaveBadKeyError, "Invalid secret key #{@secret_key}"
+          end
+        else
+          unless @secret_key[0..7] == 'FLWSECK-' || @secret_key[0..12] == 'FLWSECK_TEST-'
+            raise RaveBadKeyError, "Invalid secret key #{@secret_key}"
+          end
         end
   end
 
