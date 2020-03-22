@@ -22,7 +22,7 @@ class Base
     hash = Digest::MD5.hexdigest(rave_object.secret_key)
     last_twelve = hash[hash.length-12..hash.length-1]
     private_secret_key = rave_object.secret_key.dup
-    private_secret_key['FLWSECK_'] = ''
+    private_secret_key['FLWSECK_TEST-'] = ''
     first_twelve = private_secret_key[0..11]
     return first_twelve + last_twelve
   end
